@@ -1,0 +1,12 @@
+aeroplane
+bike
+bird
+boat
+bottle
+bus
+car
+dog
+horse
+monitor
+motorbike
+people
