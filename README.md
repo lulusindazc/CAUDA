@@ -60,7 +60,7 @@ python train_debug.py --cfg experiments/config/Office-31/C2C/office31_train_amaz
 ```
 for the VisDA-2017 dataset,
 ```
-python train_debug.py --cfg experiments/config/VisDA-2017/CAN/visda17_train_train2val_cfg.yaml --method CENTER_KMEANS_SP --exp_name visda17_train2val
+python train_debug.py --cfg experiments/config/VisDA-2017/C2C/visda17_train_train2val_cfg.yaml --method CENTER_KMEANS_SP --exp_name visda17_train2val
 ```
 The experiment log file and the saved checkpoints will be stored at ./experiments/ckpt/${experiment_name}
 
