@@ -301,36 +301,17 @@ class KMEANSSPSolver(BaseSolver):
                 feats_toalign_S = self.prepare_feats(feats_source)
                 feats_toalign_T = self.prepare_feats(feats_target)
 
-                probs_toalign_S = self.prepare_center_probs(feats_source, source_nums_cls)
-                probs_toalign_T=self.prepare_center_probs(feats_target,target_nums_cls)
-                # tgt_pse_ce_loss = self.opt.PROTOTYPE.LOSS_WEIGHT * self.proto_center_pseudo(feats_toalign_T[-1],
-                #                                                                             target_weights,
-                #                                                                             log_space=False)
-                tgt_pse_ce_loss=self.opt.PROTOTYPE.LOSS_WEIGHT * compute_p2c_prob_loss(feats_toalign_S[-1], probs_toalign_S,feats_toalign_T[-1],
-                               probs_toalign_T)
                 cdd_loss = self.c2c.forward(feats_toalign_S, feats_toalign_T,
                                source_nums_cls, target_nums_cls)[self.discrepancy_key]
-                # if self.consistency>0.4:
-                fcd_loss=self.f2c.forward(feats_toalign_S, feats_toalign_T,
-                               source_nums_cls, target_nums_cls)[self.discrepancy_key]
-                fcd_wei=self.opt.CDD.INTRA_LOSS_WEIGHT
-                fcd_loss *= fcd_wei
-                # else:
-                #
-                #     fcd_loss = 0.0
+
                 cdd_loss *= self.opt.CDD.LOSS_WEIGHT
 
-
-
-                loss2 = cdd_loss + fcd_loss+tgt_pse_ce_loss
+                loss2 = cdd_loss #+ fcd_loss#+tgt_pse_ce_loss
                 loss2.backward()
                 # cdd_loss.backward()
                 self.writer.add_scalar('c2c_loss', cdd_loss, self.iters)
-                self.writer.add_scalar('fcd_loss', fcd_loss, self.iters)
-                self.writer.add_scalar('tgt_pse_ce_loss', tgt_pse_ce_loss, self.iters)
                 cdd_loss_iter += cdd_loss
-                fcd_loss_iter += fcd_loss
-                tgt_pse_iter+=tgt_pse_ce_loss
+
                 loss += loss2#cdd_loss
 
             # update the network
@@ -339,7 +320,7 @@ class KMEANSSPSolver(BaseSolver):
             if self.opt.TRAIN.LOGGING and (update_iters+1) % \
                       (max(1, self.iters_per_loop // self.opt.TRAIN.NUM_LOGGING_PER_LOOP)) == 0:
                 accu,_ = self.model_eval(source_preds, source_gt)
-                cur_loss = {'ce_loss': ce_loss_iter, 'cdd_loss': cdd_loss_iter, 'fcd_loss': fcd_loss_iter,'tgt_pse_ce_loss':tgt_pse_iter,
+                cur_loss = {'ce_loss': ce_loss_iter, 'cdd_loss': cdd_loss_iter
                             'total_loss': loss}
                 self.logging(cur_loss, accu)
 
