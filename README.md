@@ -73,7 +73,7 @@ python test.py --cfg experiments/config/Office-31/office31_test_amazon_cfg.yaml 
 ```
 
 ## Trained models
-We also release some trained models in Google Drive[<https://drive.google.com/drive/folders/12_ymjdOGPTlUp5mJZNh33BMgD5M3qCA_?usp=sharing>]. You may verify some accuracies we reported in paper by running the test file.
+We also release some trained models in Google Drive[<https://drive.google.com/drive/folders/12_ymjdOGPTlUp5mJZNh33BMgD5M3qCA_?usp=sharing>]. You may verify some accuracies we report in paper by running the test file.
 
 ## Contact
 If you have any questions, please contact me via zhangcan.lulu@gmail.com.
