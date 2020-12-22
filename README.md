@@ -66,14 +66,14 @@ The experiment log file and the saved checkpoints will be stored at ./experiment
 
 ## Test
 
-```
-python test.py --cfg ${config_yaml} --exp_name ${experiment_name}
-```
+
 Example: 
 ```
 python test.py --cfg experiments/config/Office-31/office31_test_amazon_cfg.yaml --exp_name visda17_test
 ```
 
+## Trained models
+We also release some trained models in Google Drive[<https://drive.google.com/drive/folders/12_ymjdOGPTlUp5mJZNh33BMgD5M3qCA_?usp=sharing>]. You may verify some accuracies we reported in paper by running the test file.
 
 ## Contact
 If you have any questions, please contact me via zhangcan.lulu@gmail.com.
